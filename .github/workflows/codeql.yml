@@ -45,15 +45,25 @@ jobs:
             exit 1
           fi
 
-      - name: Python Eval Function Check
+      - name: Check for Eval Function
+        id: eval-check
         run: |
-          import python
-
-          from Expr evalExpr, string evalString
-          where
-            evalExpr = evalExpr.getExpr() and
-            evalString = evalExpr.toString()
-          select evalExpr, evalString
+          # Use Python script to check for eval function
+          ERROR_DETECTED=false
+          for file in $(find . -type f -name "*.py"); do
+            if grep -q "eval(" "$file"; then
+              echo "Security issue: eval() function used in $file"
+              ERROR_DETECTED=true
+            fi
+          done
+          echo "::set-output name=ERROR_DETECTED::$ERROR_DETECTED"
+      
+      - name: Check for Eval Errors
+        run: |
+          if [ ${{ steps.eval-check.outputs.ERROR_DETECTED }} == true ]; then
+            echo "Security issue detected: eval() function used."
+            exit 1
+          fi
         
 
   
