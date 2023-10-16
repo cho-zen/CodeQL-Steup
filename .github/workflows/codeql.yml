@@ -29,13 +29,22 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Code Scanning
+        id: code-scanning
         run: |
           # Run your code scanning tools here
           # Set a flag if an error is detected
           # Example: ERROR_DETECTED=true
           if [error_detected]; then
-            echo "::set-env name=ERROR_DETECTED::true"
+            echo "::set-output name=ERROR_DETECTED::true"
           fi
+
+      - name: Check for Errors
+        run: |
+          if ${{ steps.code-scanning.outputs.ERROR_DETECTED == 'true' }}; then
+            echo "Code scanning error detected. Disabling pull request."
+            exit 1
+          fi
+
   
   analyze:
     name: Analyze
