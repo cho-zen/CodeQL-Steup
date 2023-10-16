@@ -16,9 +16,15 @@ jobs:
             # Exit with a non-zero code to indicate an error
             exit 1
           fi
+          
       - name: Check for Errors
+        if: failure()
         run: |
-          if ["true" == "true"]; then
-            echo "Code scanning error detected. Disabling pull request."
-            exit 1
-          fi
+          echo "Code scanning error detected. Disabling pull request."
+          exit 1
+
+      - name: Additional Check
+        if: steps.code-scanning.outputs.ERROR_DETECTED == 'true'
+        run: |
+          echo "Additional error detected. Disabling pull request."
+          exit 1
