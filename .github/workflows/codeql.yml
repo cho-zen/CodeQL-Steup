@@ -45,6 +45,17 @@ jobs:
             exit 1
           fi
 
+      - name: Python Eval Function Check
+        run: |
+          import python
+
+          from Expr evalExpr, string evalString
+          where
+            evalExpr = evalExpr.getExpr() and
+            evalString = evalExpr.toString()
+          select evalExpr, evalString
+        
+
   
   analyze:
     name: Analyze
