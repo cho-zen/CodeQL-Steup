@@ -1,0 +1,18 @@
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  validate-pull-request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check for Errors
+        run: |
+          if [ "$ERROR_DETECTED" == "true" ]; then
+            echo "Code scanning error detected. Disabling pull request."
+            # Exit with a non-zero code to indicate an error
+            exit 1
+          fi
