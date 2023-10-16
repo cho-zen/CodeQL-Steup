@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 
 a = "python ML"
+name = eval(input(""))
 
 app = Flask(__name__)
 @app.route('/')
