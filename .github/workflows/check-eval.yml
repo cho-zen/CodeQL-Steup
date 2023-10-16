@@ -1,0 +1,17 @@
+name: Python Eval Function Check
+language: python
+
+database:
+  languages:
+    - python
+
+queries:
+  - name: find-eval-usages
+    query: |
+      import python
+
+      from Expr evalExpr, string evalString
+      where
+        evalExpr = evalExpr.getExpr() and
+        evalString = evalExpr.toString()
+      select evalExpr, evalString
