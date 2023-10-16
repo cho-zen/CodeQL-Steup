@@ -21,6 +21,22 @@ on:
     - cron: '34 9 * * 3'
 
 jobs:
+  code-scanning:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Code Scanning
+        run: |
+          # Run your code scanning tools here
+          # Set a flag if an error is detected
+          # Example: ERROR_DETECTED=true
+          if [error_detected]; then
+            echo "::set-env name=ERROR_DETECTED::true"
+          fi
+  
   analyze:
     name: Analyze
     # Runner size impacts CodeQL analysis time. To learn more, please see:
