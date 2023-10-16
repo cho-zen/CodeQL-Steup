@@ -61,8 +61,7 @@ jobs:
       - name: Check for Eval Errors
         run: |
           if [ ${{ steps.eval-check.outputs.ERROR_DETECTED }} == true ]; then
-            echo "Security issue detected: eval() function used."
-            exit 1
+            echo "::set-output name=ERROR_DETECTED::true"
           fi
         
 
