@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
 
 a = "python ML"
-name = eval(input(""))
+b = eval(input("Enter name "))
 
 app = Flask(__name__)
 @app.route('/')
