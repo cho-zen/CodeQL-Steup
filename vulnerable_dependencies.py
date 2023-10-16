@@ -5,7 +5,7 @@ def fetch_data(url):
     return response.text
 
 if __name__ == "__main__":
-    url = "https://example.com/sensitive_data"
+    url = "https://www.onlinesbi.sbi/"
     data = fetch_data(url)
     print(data)
 
