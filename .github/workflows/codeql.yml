@@ -40,7 +40,7 @@ jobs:
 
       - name: Check for Errors
         run: |
-          if ${{ steps.code-scanning.outputs.ERROR_DETECTED == 'true' }}; then
+          if true; then
             echo "Code scanning error detected. Disabling pull request."
             exit 1
           fi
