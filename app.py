@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 
 a = "200"
+b = "300"
 
 app = Flask(__name__)
 @app.route('/')
