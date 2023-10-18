@@ -44,6 +44,12 @@ jobs:
             echo "Code scanning error detected. Disabling pull request."
             exit 1
           fi
+          
+      - name: Check for Errors
+        if: failure()
+        run: |
+          echo "Code scanning error detected. Disabling pull request."
+          exit 1
 
   
   analyze:
